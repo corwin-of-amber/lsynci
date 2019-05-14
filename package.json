@@ -1,0 +1,13 @@
+{
+  "name": "lsynci",
+  "version": "1.0.0",
+  "description": "Live sync utility",
+  "main": "index.js",
+  "repository": "https://github.com/corwin-of-amber/lsynci",
+  "author": "Shachar Itzhaky",
+  "license": "MIT",
+  "dependencies": {
+    "minimatch": "^3.0.4",
+    "throttle-debounce": "^2.1.0"
+  }
+}
