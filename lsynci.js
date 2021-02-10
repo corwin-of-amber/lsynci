@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const fs = require('fs'),
       events = require('events'),
       child_process = require('child_process'),
@@ -71,14 +72,21 @@ class CommandSync {
 
 
 if (module.id === '.') {
-    var w = new Watch(), arg = process.argv[2];
+    var excludes = ['**/.*', '**/_*', '**/node_modules'],
+        opts = require('commander')
+        .option('-x, --exclude <path>',     'directories or patterns to exclude')
+        .option('-c, --command <cmd>',      'command to execute when watched files are changed')
+        .on('option:exclude', e => excludes.push(e))
+        .parse(process.argv);
+
+    var w = new Watch();
 
     w.add('.');
 
-    w.exclude('**/.*{,/**}', '**/_*{,/**}', '**/node_modules/**');
+    w.exclude(...excludes.map(x => `${x}{,/**}`));
 
-    if (arg) {
-        var c = new CommandSync(arg);
+    if (opts.command) {
+        var c = new CommandSync(opts.command);
         w.on('change', msg => c.invoke(msg));
     }
 }

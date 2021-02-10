@@ -7,7 +7,11 @@
   "author": "Shachar Itzhaky",
   "license": "MIT",
   "dependencies": {
+    "commander": "^2.20.0",
     "minimatch": "^3.0.4",
     "throttle-debounce": "^2.1.0"
+  },
+  "bin": {
+    "lsynci": "lsynci.js"
   }
 }
